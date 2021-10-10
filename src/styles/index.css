@@ -148,7 +148,7 @@ ul {
   content: '';
   width: 22px;
   height: 22px;
-  background: url('./components/images/searchIcon.svg') no-repeat;
+  background: url('../images/searchIcon.svg') no-repeat;
   position: absolute;
   top: 1rem;
   left: 0.5rem;
