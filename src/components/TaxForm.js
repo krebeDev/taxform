@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import CheckboxGroup from './CheckboxGroup'
-import { ITEMS } from './../constants'
-import closeIcon from './images/closeIcon.svg'
+import { ITEMS } from './../utilities/constants'
+import closeIcon from '../images/closeIcon.svg'
 import validateInputs from './../utilities/validation'
 import wordsToNumbers from './../utilities/wordsToNumbers'
 
