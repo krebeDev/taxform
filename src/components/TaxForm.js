@@ -10,7 +10,7 @@ const allItemsIds = ITEMS.map(({ id }) => `${id}`)
 const bracelets = ITEMS.filter((item) => item.category?.name === 'Bracelets')
 const itemsWithoutCategory = ITEMS.filter(({ category }) => !category)
 
-const TaxForm = () => {
+const TaxForm = ({ handleSubmit }) => {
   const taxDetails = {
     applicable_items: [],
     applied_to: '',
@@ -21,28 +21,6 @@ const TaxForm = () => {
     search: '',
   }
 
-  const handleSubmit = async (values) => {
-    const { applicable_items, applied_to, name, rate } = values
-
-    const payload = {
-      applicable_items: applicable_items.map((item) => +item),
-      applied_to,
-      name: name.trim(),
-      rate: rate / 100,
-    }
-
-    console.log(payload)
-    console.log(values)
-
-    setTimeout(() => {
-      alert(JSON.stringify(payload, null, 2))
-    }, 2000)
-
-    // await server call with payload as request body
-    // then, optionally reset the form
-    // resetForm()
-  }
-
   const handleRateOnBlur = (e, handleBlur, setFieldValue, values, errors) => {
     handleBlur(e)
     const { number } = wordsToNumbers(values.name)
@@ -50,14 +28,17 @@ const TaxForm = () => {
     setFieldValue('rate', num)
   }
 
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
   return (
     <div className='formBox'>
       <h1 className='formTitle'>Add Tax</h1>
       <Formik
         validate={(values) => validateInputs(values, allItemsIds)}
         initialValues={taxDetails}
-        onSubmit={async (values, { resetForm }) => {
-          await handleSubmit(values)
+        onSubmit={async (values) => {
+          await sleep(1000)
+          handleSubmit(values)
         }}
       >
         {({
@@ -95,6 +76,7 @@ const TaxForm = () => {
                         name='rate'
                         disabled
                         className='rate--number'
+                        aria-label='rate in number'
                       />
                       <small className='percentage-symbol'>%</small>
                     </div>
@@ -144,7 +126,12 @@ const TaxForm = () => {
             <div className='sectionGroup'>
               <div className='group-inner'>
                 <div className='searchBox'>
-                  <Field type='text' name='search' placeholder='Search Items' />
+                  <Field
+                    type='text'
+                    name='search'
+                    placeholder='Search Items'
+                    aria-label='search'
+                  />
                 </div>
                 <div className='checkboxGroups'>
                   <ul
