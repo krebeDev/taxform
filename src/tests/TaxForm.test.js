@@ -12,7 +12,6 @@ describe('TaxForm', () => {
 
   it('calls submit handler when input fields pass validation', async () => {
     userEvent.type(getNameField(), 'four')
-    await gotoNextField()
 
     userEvent.click(
       screen.getByRole('radio', { name: /apply to specific items/i })
@@ -46,7 +45,6 @@ describe('TaxForm', () => {
   describe('reset button denoted with "X"', () => {
     it('clears the form on click', async () => {
       userEvent.type(getNameField(), 'twelve')
-      await gotoNextField()
       await clickSubmitButton()
       await clickResetButton()
 
@@ -82,11 +80,5 @@ async function clickResetButton() {
         name: /reset/i,
       })
     )
-  })
-}
-
-async function gotoNextField() {
-  await waitFor(() => {
-    userEvent.tab()
   })
 }
