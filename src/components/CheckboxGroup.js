@@ -44,7 +44,7 @@ const CheckboxGroup = ({ items, category, setFieldValue, values }) => {
   }
 
   const renderCheckBoxes = items.map(({ id, name }) => (
-    <li key={id} className='categoryItem'>
+    <li key={id}>
       <label>
         <Field
           type='checkbox'
@@ -59,8 +59,8 @@ const CheckboxGroup = ({ items, category, setFieldValue, values }) => {
   ))
 
   return (
-    <li className='checkboxCategory'>
-      <label className='categoryTitle'>
+    <li className='category-header'>
+      <label className='category-title'>
         <Field
           type='checkbox'
           name={category}
@@ -71,7 +71,7 @@ const CheckboxGroup = ({ items, category, setFieldValue, values }) => {
           {category}
         </span>
       </label>
-      <ul className='checkboxList'>{renderCheckBoxes}</ul>
+      <ul className='category-list'>{renderCheckBoxes}</ul>
     </li>
   )
 }
