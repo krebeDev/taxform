@@ -37,7 +37,7 @@ const TaxForm = ({ handleSubmit }) => {
 
   return (
     <div className='form-box'>
-      <h1>Add Tax</h1>
+      <h1 className='form-title'>Add Tax</h1>
       <Formik
         validate={(values) => validateInputs(values, allItemsIds)}
         initialValues={initialValues}
@@ -57,7 +57,7 @@ const TaxForm = ({ handleSubmit }) => {
           <Form>
             <div className='form-group'>
               <div className='form-group__inner'>
-                <div className='rate-group'>
+                <div role='group' aria-label='rate' className='rate-group'>
                   <div className='rate-inputs'>
                     <Field
                       type='text'
@@ -93,7 +93,11 @@ const TaxForm = ({ handleSubmit }) => {
                     role='alert'
                   />
                 </div>
-                <div className={`radio-group `}>
+                <div
+                  role='group'
+                  aria-label='items to be applied to'
+                  className={`radio-group`}
+                >
                   <div className={`radio-group__inner`}>
                     <label>
                       <Field
@@ -107,7 +111,7 @@ const TaxForm = ({ handleSubmit }) => {
                           setFieldValue('others', true)
                         }}
                       />
-                      Apply to all items in collection
+                      <span>Apply to all items in collection</span>
                     </label>
                     <label>
                       <Field
@@ -116,7 +120,7 @@ const TaxForm = ({ handleSubmit }) => {
                         value='some'
                         className='radio-button'
                       />
-                      Apply to specific items
+                      <span>Apply to specific items</span>
                     </label>
                   </div>
 
@@ -132,7 +136,7 @@ const TaxForm = ({ handleSubmit }) => {
 
             <div className='form-group'>
               <div className='form-group__inner'>
-                <div className='search-box'>
+                <div role='searchbox' className='search-box'>
                   <Field
                     type='text'
                     name='search'
@@ -140,7 +144,11 @@ const TaxForm = ({ handleSubmit }) => {
                     aria-label='search'
                   />
                 </div>
-                <div className='applicable-items-group'>
+                <div
+                  role='group'
+                  aria-label='applicable items'
+                  className='applicable-items-group'
+                >
                   <ul>
                     <CheckboxGroup
                       items={bracelets}
@@ -190,4 +198,3 @@ const TaxForm = ({ handleSubmit }) => {
 }
 
 export default TaxForm
-// add accessibility support
