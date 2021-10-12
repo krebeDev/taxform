@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import CheckboxGroup from './CheckboxGroup'
 import { ITEMS } from './../utilities/constants'
@@ -6,9 +6,9 @@ import closeIcon from '../images/closeIcon.svg'
 import validateInputs from './../utilities/validation'
 import wordsToNumbers from './../utilities/wordsToNumbers'
 
-const allItemsIds = ITEMS.map(({ id }) => `${id}`)
+const allItemsIds = ITEMS.map(({ id }) => id.toString())
 const bracelets = ITEMS.filter((item) => item.category?.name === 'Bracelets')
-const itemsWithoutCategory = ITEMS.filter(({ category }) => !category)
+const otherItems = ITEMS.filter(({ category }) => !category)
 
 const TaxForm = ({ handleSubmit }) => {
   const taxDetails = {
@@ -17,15 +17,14 @@ const TaxForm = ({ handleSubmit }) => {
     name: '',
     rate: 0,
     bracelets: false,
-    unCategorized: false,
+    others: false,
     search: '',
   }
 
   const handleRateOnBlur = (e, handleBlur, setFieldValue, values, errors) => {
     handleBlur(e)
-    const { number } = wordsToNumbers(values.name)
-    const num = errors.name ? 0 : number
-    setFieldValue('rate', num)
+    const number = errors.name ? 0 : wordsToNumbers(values.name).number
+    setFieldValue('rate', number)
   }
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -37,7 +36,7 @@ const TaxForm = ({ handleSubmit }) => {
         validate={(values) => validateInputs(values, allItemsIds)}
         initialValues={taxDetails}
         onSubmit={async (values) => {
-          await sleep(1000)
+          await sleep(500)
           handleSubmit(values)
         }}
       >
@@ -89,11 +88,7 @@ const TaxForm = ({ handleSubmit }) => {
                   />
                 </div>
                 <div className={`radioGroup `}>
-                  <div
-                    className={`radioGroup-inner ${
-                      errors.applied_to && 'group-error'
-                    }`}
-                  >
+                  <div className={`radioGroup-inner`}>
                     <label>
                       <Field
                         type='radio'
@@ -102,7 +97,7 @@ const TaxForm = ({ handleSubmit }) => {
                         onClick={() => {
                           setFieldValue('applicable_items', allItemsIds)
                           setFieldValue('bracelets', true)
-                          setFieldValue('unCategorized', true)
+                          setFieldValue('others', true)
                         }}
                       />
                       Apply to all items in collection
@@ -134,11 +129,7 @@ const TaxForm = ({ handleSubmit }) => {
                   />
                 </div>
                 <div className='checkboxGroups'>
-                  <ul
-                    className={`applicable-items-list ${
-                      errors.applicable_items && 'group-error'
-                    }`}
-                  >
+                  <ul className={`applicable-items-list`}>
                     <CheckboxGroup
                       items={bracelets}
                       category='bracelets'
@@ -146,8 +137,8 @@ const TaxForm = ({ handleSubmit }) => {
                       values={values}
                     />
                     <CheckboxGroup
-                      items={itemsWithoutCategory}
-                      category='unCategorized'
+                      items={otherItems}
+                      category='others'
                       setFieldValue={setFieldValue}
                       values={values}
                     />

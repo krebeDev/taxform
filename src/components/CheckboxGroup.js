@@ -32,7 +32,7 @@ const CheckboxGroup = ({ items, category, setFieldValue, values }) => {
 
   const handleToggleAll = () => {
     const isChecked = categoryRef.current.checked
-    const itemsIds = items.map(({ id }) => `${id}`)
+    const itemsIds = items.map(({ id }) => id.toString())
 
     const mergedIds = [...new Set([...values.applicable_items, ...itemsIds])]
     const remainingItems = values.applicable_items.filter(
@@ -67,7 +67,9 @@ const CheckboxGroup = ({ items, category, setFieldValue, values }) => {
           innerRef={categoryRef}
           onClick={handleToggleAll}
         />
-        {category === 'unCategorized' ? '' : category}
+        <span className={category === 'others' ? 'hidden' : ''}>
+          {category}
+        </span>
       </label>
       <ul className='checkboxList'>{renderCheckBoxes}</ul>
     </li>
