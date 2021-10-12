@@ -103,6 +103,10 @@ input[type='checkbox']:checked + span:before {
   border-radius: 4px;
 }
 
+input[type='checkbox']:indeterminate + span:before {
+  background: url('../images//minusIcon.svg') no-repeat center;
+}
+
 input[type='text']:focus {
   outline: 1px solid var(--grey-shade);
   outline-offset: 0;
