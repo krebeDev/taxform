@@ -44,7 +44,7 @@ const CheckboxGroup = ({ items, category, setFieldValue, values }) => {
   }
 
   const renderCheckBoxes = items.map(({ id, name }) => (
-    <li key={id}>
+    <li key={id} className='category-item'>
       <label>
         <Field
           type='checkbox'
@@ -53,7 +53,7 @@ const CheckboxGroup = ({ items, category, setFieldValue, values }) => {
           data-category={category}
           onClick={handleSelect}
         />
-        {name}
+        <span>{name}</span>
       </label>
     </li>
   ))
@@ -67,8 +67,11 @@ const CheckboxGroup = ({ items, category, setFieldValue, values }) => {
           innerRef={categoryRef}
           onClick={handleToggleAll}
         />
-        <span className={category === 'others' ? 'hidden' : ''}>
-          {category}
+
+        <span>
+          <span className={category === 'others' ? 'hidden' : ''}>
+            {category}
+          </span>
         </span>
       </label>
       <ul className='category-list'>{renderCheckBoxes}</ul>
