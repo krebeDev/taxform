@@ -1,3 +1,15 @@
+:root {
+  --orange: #ff6700;
+  --very-light-orange: #ffeadb;
+  --grey: #473d37;
+  --grey-shade: #79695f;
+  --light-grey: #d8d2ce;
+  --very-light-grey: #f0edeb;
+  --white: #ffffff;
+  --dark-green: #004841;
+  --light-red: #df5f6a;
+}
+
 *,
 *::before,
 *::after {
@@ -14,7 +26,7 @@ body {
   margin: 0 auto;
   padding: 1rem;
   font: 1.6rem/1.25 Arial, sans-serif;
-  color: #473d37;
+  color: var(--grey);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,51 +35,33 @@ button {
   border: none;
   font: inherit;
   line-height: normal;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
-  padding: 1rem 2rem;
-  border-radius: 0.4rem;
 }
 
-input,
-select {
+input {
   font-family: inherit;
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
   border-radius: 0.3rem;
   padding: 1rem;
-  border: 1px solid #d8d2ce;
+  border: 1px solid var(--light-grey);
 }
 
-select,
-option {
-  text-transform: capitalize;
-}
-
-label {
+label,
+input[type='radio'],
+input[type='checkbox'],
+button {
   cursor: pointer;
 }
 
-select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-
-input[type='text']:focus,
-select:focus {
-  outline: 1px solid #79695f;
+input[type='text']:focus {
+  outline: 1px solid var(--grey-shade);
   outline-offset: 0;
 }
 
-input:invalid {
-  outline: 1px solid red;
-}
-
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  box-shadow: 0 0 0px 1000px #fff inset;
+  -webkit-box-shadow: 0 0 0px 1000px var(--white) inset;
+  box-shadow: 0 0 0px 1000px var(--white) inset;
 }
 
 input:disabled {
@@ -80,71 +74,66 @@ ul {
   margin-bottom: 0;
 }
 
-.formBox {
+.form-box {
   position: relative;
 }
 
 .formTitle,
-.group-inner {
+.form-group__inner {
   padding: 0 2rem;
 }
 
-.sectionGroup {
-  border-bottom: 1px solid #d8d2ce;
+.form-group {
+  border-bottom: 1px solid var(--light-grey);
   margin-bottom: 1rem;
 }
 
-.ratesGroup {
+.rate-group {
   width: 95%;
 }
 
-.radioGroup {
-  margin: 2rem 0;
-}
-
-.radioGroup-inner > label {
-  margin-top: 1rem;
-  display: block;
-}
-
-.radioGroup-inner label > input[type='radio'] {
-  margin-right: 0.6rem;
-}
-
-.checkboxGroups {
-  margin-bottom: 8rem;
-}
-
-.rateInputs {
+.rate-inputs {
   white-space: nowrap;
 }
 
-.numberBox {
+.rate-number-box {
   position: relative;
   display: inline-block;
 }
 
-.percentage-symbol {
+.percent-sign {
   position: absolute;
   top: 1.2rem;
   right: 1rem;
 }
 
-.rate--name {
+.rate-input__name {
   margin-right: 1rem;
   width: 50%;
 }
 
-.rate--number {
+.rate-input__number {
   max-width: 7rem;
 }
 
-.searchBox {
+.radio-group {
+  margin: 2rem 0;
+}
+.radio-group__inner > label {
+  margin: 1rem 0;
+  display: block;
+}
+
+.radio-button {
+  margin-right: 0.6rem;
+}
+
+.search-box {
   position: relative;
   margin-top: 2rem;
 }
 
-.searchBox::before {
+.search-box::before {
   content: '';
   width: 22px;
   height: 22px;
@@ -154,31 +143,50 @@ ul {
   left: 0.5rem;
 }
 
-.searchBox input {
+.search-box > input {
   padding-left: 3rem;
 }
 
-.categoryTitle {
-  background: #f0edeb;
-  display: block;
-  border-radius: 0.2rem;
+.applicable-items-group {
+  margin-bottom: 8rem;
 }
 
-.checkboxList {
+.category-title {
+  background: var(--very-light-grey);
+  display: block;
+  border-radius: 0.2rem;
+  text-transform: capitalize;
+}
+
+.hidden {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.category-list {
   padding: 1rem;
 }
 
-.checkboxCategory label > input[type='checkbox'] {
+.category-header input[type='checkbox'] {
   margin: 1rem;
 }
 
-.buttonGroup {
+.button-group {
   text-align: right;
 }
 
+.btn {
+  padding: 1rem 2rem;
+  border-radius: 0.4rem;
+}
+
 .btn--submit {
-  background: #ff6700;
-  color: #ffeadb;
+  background: var(--orange);
+  color: var(--very-light-orange);
 }
 
 .btn--reset {
@@ -190,14 +198,8 @@ ul {
 
 .error {
   display: block;
-  color: #df5f6a;
+  color: var(--light-red);
   margin-top: 0.5rem;
-}
-
-.group-error {
-  border: 1px solid #ec9ea5;
-  border-radius: 0.3rem;
-  padding: 1rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -206,21 +208,19 @@ ul {
     line-height: 1.31579;
   }
 
-  .ratesGroup {
+  .rate-group {
     width: 90%;
   }
 
-  .rate--name {
+  .rate-input__name {
     width: 75%;
   }
 
-  .rate--number {
+  .rate-input__number {
     max-width: 10rem;
   }
 
-  .percentage-symbol {
+  .percent-sign {
     top: 1rem;
   }
 }
-
-/* green: #004841 */

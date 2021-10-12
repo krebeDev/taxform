@@ -2,16 +2,16 @@ import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import CheckboxGroup from './CheckboxGroup'
 import { ITEMS } from './../utilities/constants'
-import closeIcon from '../images/closeIcon.svg'
 import validateInputs from './../utilities/validation'
 import wordsToNumbers from './../utilities/wordsToNumbers'
+import closeIcon from '../images/closeIcon.svg'
 
 const allItemsIds = ITEMS.map(({ id }) => id.toString())
 const bracelets = ITEMS.filter((item) => item.category?.name === 'Bracelets')
 const otherItems = ITEMS.filter(({ category }) => !category)
 
 const TaxForm = ({ handleSubmit }) => {
-  const taxDetails = {
+  const initialValues = {
     applicable_items: [],
     applied_to: '',
     name: '',
@@ -21,8 +21,14 @@ const TaxForm = ({ handleSubmit }) => {
     search: '',
   }
 
-  const handleRateOnBlur = (e, handleBlur, setFieldValue, values, errors) => {
-    handleBlur(e)
+  const handleRateOnBlur = (
+    event,
+    handleBlur,
+    setFieldValue,
+    values,
+    errors
+  ) => {
+    handleBlur(event)
     const number = errors.name ? 0 : wordsToNumbers(values.name).number
     setFieldValue('rate', number)
   }
@@ -30,11 +36,11 @@ const TaxForm = ({ handleSubmit }) => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
   return (
-    <div className='formBox'>
-      <h1 className='formTitle'>Add Tax</h1>
+    <div className='form-box'>
+      <h1>Add Tax</h1>
       <Formik
         validate={(values) => validateInputs(values, allItemsIds)}
-        initialValues={taxDetails}
+        initialValues={initialValues}
         onSubmit={async (values) => {
           await sleep(500)
           handleSubmit(values)
@@ -49,19 +55,19 @@ const TaxForm = ({ handleSubmit }) => {
           handleBlur,
         }) => (
           <Form>
-            <div className='sectionGroup'>
-              <div className='group-inner'>
-                <div className={`ratesGroup `}>
-                  <div className={`rateInputs`}>
+            <div className='form-group'>
+              <div className='form-group__inner'>
+                <div className='rate-group'>
+                  <div className='rate-inputs'>
                     <Field
                       type='text'
                       name='name'
-                      className='rate--name'
+                      className='rate-input__name'
                       autoComplete='off'
                       aria-label='rate in words'
-                      onBlur={(e) =>
+                      onBlur={(event) =>
                         handleRateOnBlur(
-                          e,
+                          event,
                           handleBlur,
                           setFieldValue,
                           values,
@@ -69,15 +75,15 @@ const TaxForm = ({ handleSubmit }) => {
                         )
                       }
                     />
-                    <div className='numberBox'>
+                    <div className='rate-number-box'>
                       <Field
                         type='text'
                         name='rate'
                         disabled
-                        className='rate--number'
+                        className='rate-input__number'
                         aria-label='rate in number'
                       />
-                      <small className='percentage-symbol'>%</small>
+                      <small className='percent-sign'>%</small>
                     </div>
                   </div>
                   <ErrorMessage
@@ -87,13 +93,14 @@ const TaxForm = ({ handleSubmit }) => {
                     role='alert'
                   />
                 </div>
-                <div className={`radioGroup `}>
-                  <div className={`radioGroup-inner`}>
+                <div className={`radio-group `}>
+                  <div className={`radio-group__inner`}>
                     <label>
                       <Field
                         type='radio'
                         name='applied_to'
                         value='all'
+                        className='radio-button'
                         onClick={() => {
                           setFieldValue('applicable_items', allItemsIds)
                           setFieldValue('bracelets', true)
@@ -103,7 +110,12 @@ const TaxForm = ({ handleSubmit }) => {
                       Apply to all items in collection
                     </label>
                     <label>
-                      <Field type='radio' name='applied_to' value='some' />
+                      <Field
+                        type='radio'
+                        name='applied_to'
+                        value='some'
+                        className='radio-button'
+                      />
                       Apply to specific items
                     </label>
                   </div>
@@ -118,9 +130,9 @@ const TaxForm = ({ handleSubmit }) => {
               </div>
             </div>
 
-            <div className='sectionGroup'>
-              <div className='group-inner'>
-                <div className='searchBox'>
+            <div className='form-group'>
+              <div className='form-group__inner'>
+                <div className='search-box'>
                   <Field
                     type='text'
                     name='search'
@@ -128,8 +140,8 @@ const TaxForm = ({ handleSubmit }) => {
                     aria-label='search'
                   />
                 </div>
-                <div className='checkboxGroups'>
-                  <ul className={`applicable-items-list`}>
+                <div className='applicable-items-group'>
+                  <ul>
                     <CheckboxGroup
                       items={bracelets}
                       category='bracelets'
@@ -153,19 +165,19 @@ const TaxForm = ({ handleSubmit }) => {
               </div>
             </div>
 
-            <div className='buttonGroup'>
+            <div className='button-group'>
               <button
                 type='submit'
                 disabled={isSubmitting}
-                className='btn--submit'
+                className='btn btn--submit'
               >
                 Apply tax to {values.applicable_items.length} item(s)
               </button>
               <button
                 type='button'
-                className='btn--reset'
+                className='btn btn--reset'
                 onClick={resetForm}
-                title='Reset'
+                title='Reset form'
               >
                 <img src={closeIcon} alt='reset' width={24} height={24} />
               </button>
