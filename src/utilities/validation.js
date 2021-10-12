@@ -1,6 +1,6 @@
 import wordsToNumbers from './wordsToNumbers'
 
-const validateInputs = (values, allItems) => {
+const validateInputs = (values, totalItems) => {
   const {
     name,
     applicable_items: applicableItems,
@@ -22,7 +22,7 @@ const validateInputs = (values, allItems) => {
   if (!appliedTo) {
     errors.applied_to = 'Please choose an option'
   }
-  if (appliedTo === 'all' && numberOfApplicableItems !== allItems.length) {
+  if (appliedTo === 'all' && numberOfApplicableItems !== totalItems) {
     errors.applied_to =
       'You selected "Apply to all items in collection" but unchecked some items. Either check all items in each category or choose "Apply to specific items" to continue'
   }

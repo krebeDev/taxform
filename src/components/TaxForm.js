@@ -9,6 +9,7 @@ import closeIcon from '../images/closeIcon.svg'
 const allItemsIds = ITEMS.map(({ id }) => id.toString())
 const bracelets = ITEMS.filter((item) => item.category?.name === 'Bracelets')
 const otherItems = ITEMS.filter(({ category }) => !category)
+const totalItems = ITEMS.length
 
 const TaxForm = ({ handleSubmit }) => {
   const initialValues = {
@@ -39,7 +40,7 @@ const TaxForm = ({ handleSubmit }) => {
     <div className='form-box'>
       <h1 className='form-title'>Add Tax</h1>
       <Formik
-        validate={(values) => validateInputs(values, allItemsIds)}
+        validate={(values) => validateInputs(values, totalItems)}
         initialValues={initialValues}
         onSubmit={async (values) => {
           await sleep(500)
