@@ -1,8 +1,11 @@
 # Tax Resource Form
 
-The form enables users to create and edit tax resources. I didn't get to use the optional rest-hoook package however.
+The form enables users to create and edit tax resources. <br />
+I didn't get to use the optional rest-hoook package however. <br />
+The output is logged to the browser console.
 
-I've made an assumption on the rate field. The minimum and maximum allowable rates are "one" and "ninety nine" respectively.
+I've made an assumption on the rate field. <br />
+The minimum and maximum allowable rates are "one" and "ninety nine" respectively.
 
 Here's a [demo](http://krebeDev.github.io/taxform).
 
