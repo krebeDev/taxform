@@ -1,6 +1,8 @@
 # Tax Resource Form
 
-The form enables users to create and edit tax resources.
+The form enables users to create and edit tax resources. I didn't get to use the optional rest-hoook package however.
+
+I've made an assumption on the rate field. The minimum and maximum allowable rates are "one" and "ninety nine" respectively.
 
 ## Dependencies
 
