@@ -86,25 +86,23 @@ input[type='checkbox'] + span:before {
   margin-right: 1.5rem;
 }
 
-input[type='radio']:checked + span:before,
 input[type='checkbox']:checked + span:before {
-  background: url('../images/checkIcon.svg') no-repeat center;
+  background: url('../images/checkIcon.svg') no-repeat center var(--cyan);
   background-color: var(--cyan);
   border-color: var(--cyan);
-}
-
-input[type='radio']:checked + span:before {
-  background-size: 18px;
-  border-radius: 50%;
-}
-
-input[type='checkbox']:checked + span:before {
   background-size: 20px;
   border-radius: 4px;
 }
 
 input[type='checkbox']:indeterminate + span:before {
   background: url('../images//minusIcon.svg') no-repeat center;
+}
+
+input[type='radio']:checked + span:before {
+  background: url('../images/checkIcon.svg') no-repeat center var(--orange);
+  border-color: var(--orange);
+  background-size: 18px;
+  border-radius: 50%;
 }
 
 input[type='text']:focus {
