@@ -1,7 +1,7 @@
 # Tax Resource Form
 
 The form enables users to create and edit tax resources. <br />
-I didn't get to use the optional rest-hoook package however. <br />
+I didn't get to use the optional rest-hook package however. <br />
 The output is logged to the browser console.
 
 I've made an assumption on the rate field. <br />
