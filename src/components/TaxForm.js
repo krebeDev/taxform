@@ -66,6 +66,7 @@ const TaxForm = ({ handleSubmit }) => {
                       className='rate-input__name'
                       autoComplete='off'
                       aria-label='rate in words'
+                      placeholder='Enter rate in words'
                       onBlur={(event) =>
                         handleRateOnBlur(
                           event,
