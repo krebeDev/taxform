@@ -4,6 +4,8 @@ The form enables users to create and edit tax resources. I didn't get to use the
 
 I've made an assumption on the rate field. The minimum and maximum allowable rates are "one" and "ninety nine" respectively.
 
+Here's a [demo](http://krebeDev.github.io/taxform).
+
 ## Dependencies
 
 - [React v17.0.2](https://github.com/facebook/create-react-app)
