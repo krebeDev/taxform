@@ -233,7 +233,7 @@ ul {
 
 .btn--submit {
   background: var(--orange);
-  color: var(--very-light-orange);
+  color: var(--white);
 }
 
 .btn--reset {
