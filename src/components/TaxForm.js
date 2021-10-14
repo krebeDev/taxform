@@ -58,7 +58,7 @@ const TaxForm = ({ handleSubmit }) => {
           <Form>
             <div className='form-group'>
               <div className='form-group__inner'>
-                <div role='group' aria-label='rate' className='rate-group'>
+                <div aria-label='rate' className='rate-group'>
                   <div className='rate-inputs'>
                     <Field
                       type='text'
@@ -96,7 +96,6 @@ const TaxForm = ({ handleSubmit }) => {
                   />
                 </div>
                 <div
-                  role='group'
                   aria-label='items to be applied to'
                   className={`radio-group`}
                 >
@@ -138,16 +137,15 @@ const TaxForm = ({ handleSubmit }) => {
 
             <div className='form-group'>
               <div className='form-group__inner'>
-                <div role='searchbox' className='search-box'>
+                <div className='search-box'>
                   <Field
                     type='text'
                     name='search'
                     placeholder='Search Items'
-                    aria-label='search'
+                    aria-label='searchbox'
                   />
                 </div>
                 <div
-                  role='group'
                   aria-label='applicable items'
                   className='applicable-items-group'
                 >
